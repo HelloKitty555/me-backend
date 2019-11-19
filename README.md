@@ -1,0 +1,5 @@
+1.config文件夹db.js定义如何连接数据库
+2.controllers文件夹定义不同数据表的控制器
+3.modules文件夹定义数据表
+4.routers定义接口路由器
+5.schema定义不同数据表的结构
