@@ -10,8 +10,8 @@ router.post('/createArticle', ArticleController.create)
 router.post('/getArticleInfo', ArticleController.detail)
 // 列举文章
 router.post('/listArticles', ArticleController.list)
-// // 修改文章
-// router.post('/updateArticle', ArticleController.update)
-// // 删除文章
-// router.delete('/deleteArticle', ArticleController.delete)
+// 修改文章
+router.post('/updateArticle', ArticleController.update)
+// 删除文章
+router.post('/deleteArticle', ArticleController.delete)
 module.exports = router

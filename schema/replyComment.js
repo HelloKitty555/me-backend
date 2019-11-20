@@ -16,6 +16,12 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             field: 'replyCommenter_name',
         },
+        // 是否是作者
+        isAuthor: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            field: 'isAuthor'
+        },
         // 回复内容
         replyComment_content: {
             type: DataTypes.TEXT,

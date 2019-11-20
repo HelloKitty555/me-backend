@@ -1,6 +1,8 @@
 const db = require('../config/db')
 const Sequelize = db.sequelize
 const Article = Sequelize.import('../schema/article')
+const sequelize = require('sequelize')
+const Op = sequelize.Op
 // 自动创建表
 Article.sync({ force: false })
 
@@ -15,8 +17,7 @@ class ArticleModel {
             title: title,
             content: content,
             tabs: tabs,
-            author: '谢梓健',
-            category: '博客'
+            author: '谢梓健'
         })
     }
 
@@ -38,20 +39,18 @@ class ArticleModel {
     * @param limit 
     * @returns {Promise<Model>}
     */
-    static async listArticles(start, limit, tabs) {
+    static async listArticles(start, limit, tabs, desc) {
         const query = {
             where: {
                 tabs: {
-                    [Op.like]: `%1%`
+                    [Op.substring]: tabs 
                 }
             },
-            order: [
-                ['create_time', 'DESC']
-            ]
+            offset: start,
+            limit: limit
         }
-        if (start && limit) {
-            query.offset = start
-            query.limit = limit
+        if (desc) {
+            query.order = [[desc, 'DESC']]
         }
         return await Article.findAndCountAll(query)
     }
@@ -73,8 +72,12 @@ class ArticleModel {
      * @param content
      * @returns {Promise<Model>}
      */
-    static async updateArticle(id, content) {
+    static async updateArticle(id, title, content, tabs) {
         return await Article.update({
+            title: title,
+            content: content,
+            tabs: tabs
+            }, {
             where: {
                 id: id
             }

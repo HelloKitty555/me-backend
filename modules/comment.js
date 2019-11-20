@@ -27,11 +27,9 @@ class CommentModel {
       const query = {
         where: {
           article_id: params.article_id
-        }
-      }
-      if (params.start && params.limit) {
-        query.offset = params.start
-        query.limit = params.limit
+        },
+        offset: params.start,
+        limit: params.limit
       }
       return await Comment.findAndCountAll(query)
   }
@@ -47,19 +45,6 @@ class CommentModel {
           }
       })
   }
-  /**
-   * 更新文章内容
-   * @param id
-   * @param content
-   * @returns {Promise<Model>}
-   */
-  // static async updateArticle(id, content) {
-  //     return await Article.update({
-  //         where: {
-  //             id: id
-  //         }
-  //     })
-  // }
 }
 
 module.exports = CommentModel

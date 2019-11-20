@@ -60,6 +60,31 @@ class commentController {
          }
       
      }
+      /**
+      * 删除评论
+      * @param ctx
+      * @returns {Promise.<void>}
+      */
+     static async delete(ctx) {
+         const comment_id = ctx.request.body.comment_id
+         if (comment_id) {
+            try {
+                await CommentModel.deleteComment(comment_id)
+                ctx.body = {
+                    code: 'S_OK'
+                }
+            } catch(err) {
+                ctx.body = {
+                    code: 'ERROR',
+                    data: err
+                }
+            }
+         } else {
+            ctx.body = {
+                code: 'REQUIRE_COMMENT_ID'
+            }
+         }
+     }
 
 }
 

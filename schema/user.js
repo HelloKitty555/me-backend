@@ -1,38 +1,26 @@
 const moment = require('moment')
 
-// 定义文章的数据表结构
+// 定义用户的数据表结构
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('article', {
-        // 文章ID
+    return sequelize.define('user', {
+        // 用户id
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             allowNull: true,
             autoIncrement: true,
         },
-        // 文章标题
-        title: {
+        // 用户账号
+        user_id: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: 'title',
+            field: 'user_id',
         },
-        // 文章作者
-        author: {
+        // 用户密码
+        password: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: 'author'
-        },
-        // 文章内容
-        content: {
-            type: DataTypes.TEXT,
-            allowNull: false,
-            field: 'content'
-        },
-        // 文章标签
-        tabs: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            field: 'tabs'
+            field: 'password'
         }
 
     }, {

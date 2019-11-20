@@ -18,6 +18,20 @@ class ReplyCommentModel {
         comment_id: comment_id
       })
   }
+   /**
+   * 作者回复
+   * @param data
+   * @returns {Promise<*>}
+   */
+  static async authorReply(article_id, comment_id, replyComment_content) {
+    return await ReplyComment.create({
+      replyCommenter_name: '谢梓健',
+      replyComment_content: replyComment_content,
+      article_id: article_id,
+      comment_id: comment_id,
+      isAuthor: true
+    })
+}
     /**
    * 列出回复
    * @param data

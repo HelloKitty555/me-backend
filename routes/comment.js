@@ -6,5 +6,7 @@ router.prefix('/api')
 router.post('/createComment', CommentController.create)
 // 列出评论
 router.post('/listComments', CommentController.list)
+// 删除评论
+router.post('/deleteComment', CommentController.delete)
 
 module.exports = router

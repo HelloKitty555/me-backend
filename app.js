@@ -6,12 +6,14 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const cors = require('koa2-cors')
+const session = require("koa-session2")
 
 const index = require('./routes/index')
 const article = require('./routes/article')
 const comment = require('./routes/comment')
 const replyComment = require('./routes/replyComment')
 const file = require('./routes/file')
+const user = require('./routes/user')
 
 // error handler
 onerror(app)
@@ -47,6 +49,7 @@ app.use(article.routes(), article.allowedMethods())
 app.use(file.routes(), article.allowedMethods())
 app.use(comment.routes(), comment.allowedMethods())
 app.use(replyComment.routes(), replyComment.allowedMethods())
+app.use(user.routes(), user.allowedMethods())
 // app.use(cors())
 // 跨域
 app.use(cors(
@@ -61,10 +64,14 @@ app.use(cors(
   allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }
 ))
+// // session处理
+// app.use(session({
+//   maxAge: 20 * 1000
+// }))
 // 错误处理
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 })
 // 端口监听设置
-app.listen(4001)
+app.listen(3000)
 module.exports = app
